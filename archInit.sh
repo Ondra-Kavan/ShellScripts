@@ -37,6 +37,7 @@ FILE=/home/$SUDO_USER/.cargo/bin/hx
 if test -f "$FILE"; then
     printf "$FILE$EXISTS"
 else
+    su $SUDO_USER
     ./hx.sh
 fi
 
@@ -45,11 +46,19 @@ FILE=/usr/local/bin/oh-my-posh
 if test -f "$FILE"; then
     printf "$FILE$EXISTS"
 else
+    su $SUDO_USER
     ./omp.sh
 fi
 
-printf "\n\n" >> /home/$SUDO_USER/.bashrc
-printf "alias ls='exa -lGh'\n" >> /home/$SUDO_USER/.bashrc
+if systemd-detect-virt | grep 'oracle'; then
+    printf "System is virtual\n"
+    usermod -a -G vboxsf "$SUDO_USER"
+else
+    printf "System is physical\n"
+fi
+
+# printf "\n\n" >> /home/$SUDO_USER/.bashrc
+# printf "alias ls='exa -lGh'\n" >> /home/$SUDO_USER/.bashrc
 
 su $SUDO_USER
 exec bash
