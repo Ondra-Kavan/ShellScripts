@@ -39,3 +39,5 @@ if test -f "$FILE"; then
 else
     printf "$FILE doesn't exist."
 fi
+
+exec bash
