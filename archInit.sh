@@ -16,6 +16,14 @@ EXISTS=" exists. Skipping install...\n\n"
 pacman -Syu --needed --noconfirm exa git sudo github-cli
 echo 
 
+printf "Installing tailscale...\n"
+FILE=/bin/tailscale
+if test -f "$FILE"; then
+    printf "$FILE$EXISTS"
+else
+    curl -fsSL https://tailscale.com/install.sh | sh
+fi
+
 printf "Installing Rustup...\n"
 FILE=/bin/rustup
 if test -f "$FILE"; then
