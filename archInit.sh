@@ -13,7 +13,7 @@ fi
 
 EXISTS=" exists. Skipping install...\n\n"
 
-pacman -Syu --needed --noconfirm exa
+pacman -Syu --needed --noconfirm exa git sudo github-cli
 echo 
 
 printf "Installing Rustup...\n"
@@ -40,4 +40,5 @@ else
     printf "$FILE doesn't exist."
 fi
 
+su $SUDO_USER
 exec bash
