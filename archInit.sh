@@ -37,8 +37,11 @@ FILE=/usr/local/bin/oh-my-posh
 if test -f "$FILE"; then
     printf "$FILE$EXISTS"
 else
-    printf "$FILE doesn't exist."
+    ./omp.sh
 fi
+
+printf "\n\n" >> /home/$SUDO_USER/.bashrc
+printf "alias ls='exa -lGh'\n" >> /home/$SUDO_USER/.bashrc
 
 su $SUDO_USER
 exec bash
